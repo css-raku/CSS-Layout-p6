@@ -1,0 +1,2 @@
+role CSS::Layout {
+}
