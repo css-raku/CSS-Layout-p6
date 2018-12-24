@@ -11,7 +11,7 @@ class CSS::Layout::HTML::TagSet {
 
     submethod TWEAK {
         # No selector engine.
-        my $default-css = %?RESOURCES<xhtml.css>.absolute;
+        my $default-css = %?RESOURCES<xhtml.css>;
         my $actions = $module.actions.new;
         my $p = $module.grammar.parsefile($default-css, :$actions);
         my %ast = $p.ast;

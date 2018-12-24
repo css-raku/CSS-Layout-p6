@@ -1,15 +1,11 @@
 use v6;
 use CSS::Layout;
+use CSS::Properties::Box;
 
-class CSS::Layout::Node does CSS::Layout {
-    use PDF::Style::Element;
-    has PDF::Style::Element $.element handles <box css>;
-    has CSS::Layout::Node @.kids;
-    has Str $.tag;
-    has Any $.payload;
-
+class CSS::Layout::Node
+    is CSS::Properties::Box
+    does CSS::Layout {
     subset Leaf  of CSS::Layout::Node where { ! .kids }
 
-    method display {$!element.css.display}
 }
 

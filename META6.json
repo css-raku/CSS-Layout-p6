@@ -3,13 +3,13 @@
     "name"        : "CSS::Layout",
     "version"     : "0.0.1",
     "auth"        : "github:dwarring",
-    "description" : "CSS rendering layout engin",
-    "depends"     : [ "PDF::Content", "PDF::API6", "CSS::Module", "CSS::Properties", "XML", "HTML::Parser::XML", "PDF::Style", "HTML::Canvas" ],
-    "source-url"  : "git://github.com/dwarring/tui.git",
+    "description" : "CSS rendering layout engine",
+    "depends"     : [ "CSS::Module", "CSS::Properties", "XML", "HTML::Parser::XML", "HTML::Canvas" ],
+    "source-url"  : "git://github.com/pdf-css/CSS-Layout-p6.git",
     "provides"    : {
         "CSS::Layout"               : "lib/CSS/Layout.pm6",
-        "CSS::Layout"               : "lib/CSS/Layout.pm6",
         "CSS::Layout::Node"         : "lib/CSS/Layout/Node.pm6",
+        "CSS::Layout::PageNode"     : "lib/CSS/Layout/PageNode.pm6",
         "CSS::Layout::HTML::TagSet" : "lib/CSS/Layout/HTML/TagSet.pm6"
     },
     "resources" : [ "xhtml.css" ]

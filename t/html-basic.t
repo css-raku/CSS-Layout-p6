@@ -1,8 +1,5 @@
 use v6;
 use Test;
-use PDF::Style::Body;
-use PDF::API6;
-use PDF::Page;
 use XML;
 use HTML::Parser::XML;
 use CSS::Properties;
@@ -18,10 +15,7 @@ my $page-height;
 diag "loading html";
 my $html = 't/html/basic-p-tag.html'.IO.slurp;
 my HTML::Parser::XML $parser .= new;
-my PDF::Style::Body $body-style .= new;
-my PDF::API6 $pdf .= new;
-my PDF::Page $page = $pdf.add-page;
-todo "wire up PDF::API6 and PDF::Style...";
+todo "more stuff";
 flunk "do more stuff...";
 diag "loaded html";
 diag :$html.perl;
@@ -76,7 +70,5 @@ for $body.nodes.list {
 
     default { diag "unandled node: {.gist}" }
 }
-
-$pdf.save-as: "tmp/html-basic.pdf";
 
 ok 'skeleton';
