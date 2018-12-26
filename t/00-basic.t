@@ -1,6 +1,9 @@
 use Test;
 use CSS::Layout::HTML::TagSet;
 use CSS::Layout::PageNode;
+use CSS::Properties::Units :pt, :mm, :ops;
+sub pt(*@vals) { [@vals.map: { round(0pt + $_)}] }
+sub mm(*@vals) { [@vals.map: { round(0mm + $_)}] }
 
 my $style = "size: a5; margin-left:3pt; background-image: url(t/images/semitransparent.gif); background-color: blue; opacity: .3; border: 1pt solid red";
 
@@ -11,9 +14,10 @@ my CSS::Layout::PageNode $root .= new: :$css;
 
 is $root.css.display, 'block', "css.display";
 is $root.css.unicode-bidi, 'embed', "css.unicode-bidi";
-is $root.css.margin, [8, 8, 8, 3], "css.margin";
-is $root.content, [203, 141, 7, 4], "content box";
-is $root.margin, [210, 148, 0, 0], "margin box";
+is pt(|$root.css.margin), [6, 6, 6, 3], "css.margin";
+is pt(|$root.content), [588, 413, 7, 4], "content box";
+is pt(|$root.margin), [595, 420, 0, 0], "margin box (pt)";
+is mm(|$root.margin), [210, 148, 0, 0], "margin box (mm)";
 
 done-testing;
 
