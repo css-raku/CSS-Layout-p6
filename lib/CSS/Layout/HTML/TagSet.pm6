@@ -33,6 +33,8 @@ class CSS::Layout::HTML::TagSet {
 
     method elem-style(Str $_) {
         my $declarations =  %!declarations{.lc} // [];
-        %!css{.lc} //= CSS::Properties.new: :$declarations;
+        
+        %!css{$_} //= CSS::Properties.new: :$declarations;
     }
+
 }
