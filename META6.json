@@ -4,7 +4,7 @@
     "version"     : "0.0.1",
     "auth"        : "github:dwarring",
     "description" : "CSS rendering layout engine",
-    "depends"     : [ "CSS::Module", "CSS::Properties", "XML", "HTML::Parser::XML", "HTML::Canvas" ],
+    "depends"     : [ "CSS::Module", "CSS::Properties", "LibXML", "HTML::Canvas" ],
     "source-url"  : "git://github.com/pdf-css/CSS-Layout-p6.git",
     "provides"    : {
         "CSS::Layout"               : "lib/CSS/Layout.pm6",

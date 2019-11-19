@@ -3,17 +3,17 @@ use v6;
 class CSS::Layout::HTML::TagSet {
     use CSS::Module;
     use CSS::Module::CSS3;
-    use CSS::Properties:ver(v0.1.2+);
+    use CSS::Properties;
 
-    has CSS::Module $module = CSS::Module::CSS3.module;
+    has CSS::Module $.module = CSS::Module::CSS3.module;
     has Array %.declarations;
     has CSS::Properties %!css;
 
     submethod TWEAK {
         # rough cut. just loads simple selections on elements
         my $default-css = %?RESOURCES<xhtml.css>.absolute;
-        my $actions = $module.actions.new;
-        my $p = $module.grammar.parsefile($default-css, :$actions);
+        my $actions = $!module.actions.new;
+        my $p = $!module.grammar.parsefile($default-css, :$actions);
         my %ast = $p.ast;
         for %ast<stylesheet>.list {
             with .<ruleset> {

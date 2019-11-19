@@ -1,64 +1,42 @@
 use v6;
 use Test;
-use XML;
-use HTML::Parser::XML;
+use LibXML::Document;
+use LibXML::Element;
+use LibXML::Text;
 use CSS::Properties;
 use CSS::Layout::HTML::TagSet;
 
 my CSS::Layout::HTML::TagSet $tag-style .= new;
 
-plan 13;
+plan 11;
 
 my $page-width;
 my $page-height;
 
 diag "loading html";
-my $html = 't/html/basic-p-tag.html'.IO.slurp;
-my HTML::Parser::XML $parser .= new;
+my LibXML::Document $root .= parse: :html, :file<t/html/basic-p-tag.html>;
 todo "more stuff";
 flunk "do more stuff...";
-diag "loaded html";
-diag :$html.perl;
-diag "parsing...";
-$parser.parse($html);
-warn "parsed...";
-my $xmldoc = $parser.xmldoc; # XML::Document
-warn "progressing...";
 
-my $root = $xmldoc.root;
-my $body;
+for $root.first('html/body').nonBlankChildNodes     {
 
-if $root.name eq 'html' {
-    my @bodies = $root.nodes.grep({.can('name') && .name eq 'body' });
-    die "unable to find html body"
-        unless @bodies;
-    die "html has multiple body elements"
-        if @bodies > 1;
-    $body = @bodies[0];
-}
-else {
-    die "bad root element: $root";
-}
-
-for $body.nodes.list {
-
-    when XML::Text {
+    when LibXML::Text {
         todo "XML::Text elems";
         flunk "plain text tests";
     }
 
-    when XML::Element {
+    when LibXML::Element {
         my CSS::Properties $css = $tag-style.elem-style(.name).clone;
 
-        with .<style> -> $style {
+        with .<@style> -> $style {
             diag "style: $style";
-            lives-ok { $css.inherit($style) }, 'style processing';
+            lives-ok { $css.inherit($style.Str) }, 'style processing';
             note ~$css;
             todo "style attribute processing";
             flunk "style tests";
         }
 
-        given .name {
+        given .tag {
             when 'div' { todo "div tests"; flunk "div tests" }
             when 'p' { todo "paragraph tests"; flunk "paragraph tests" }
             when 'span' { todo "span tests"; flunk "span tests" }
@@ -66,7 +44,7 @@ for $body.nodes.list {
         }
     }
 
-    when XML::Comment {}
+    when LibXML::Comment {}
 
     default { diag "unandled node: {.gist}" }
 }

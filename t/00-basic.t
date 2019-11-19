@@ -2,8 +2,8 @@ use Test;
 use CSS::Layout::HTML::TagSet;
 use CSS::Layout::PageNode;
 use CSS::Properties::Units :pt, :mm, :ops;
-sub pt(*@vals) { [@vals.map: { round(0pt + $_)}] }
-sub mm(*@vals) { [@vals.map: { round(0mm + $_)}] }
+sub pt(*@vals) { [@vals.map: { .scale('pt').round}] }
+sub mm(*@vals) { [@vals.map: { .scale('mm').round}] }
 
 my $style = "size: a5; margin-left:3pt; background-image: url(t/images/semitransparent.gif); background-color: blue; opacity: .3; border: 1pt solid red";
 
