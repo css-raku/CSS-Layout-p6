@@ -11,6 +11,5 @@
         "CSS::Layout::Node"         : "lib/CSS/Layout/Node.pm6",
         "CSS::Layout::PageNode"     : "lib/CSS/Layout/PageNode.pm6",
         "CSS::Layout::HTML::TagSet" : "lib/CSS/Layout/HTML/TagSet.pm6"
-    },
-    "resources" : [ "xhtml.css" ]
+    }
 }
